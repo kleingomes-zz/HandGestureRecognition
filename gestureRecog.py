@@ -1,11 +1,20 @@
+#Program for creating training data
+
 import numpy as np
 import cv2
+import os
 
 cap = cv2.VideoCapture(0)
 count = 0
 inc = 0
 
-
+dir_name = input("What character would you like to create a training data set for? Enter value: ")
+try:
+    os.mkdir(dir_name)
+except OSError:
+    print("ERROR: Unable to create directory for new character")
+else:
+    print("New character directory created.")
 
 while(cap.isOpened()):
     # Capture frame-by-frame
@@ -13,7 +22,7 @@ while(cap.isOpened()):
     height, width, channels = frame.shape
 
     # Our operations on the frame come here
-    picname = "b/pic_" + str(inc) + ".png"
+    picname = str(dir_name) + "/pic_" + str(inc) + ".png"
 
     if inc < 1:
         x1 = int((1/3)*width)
